@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_management/screens/splashScreen.dart';
+import 'screens/Splash.dart'; 
 
-main() => runApp(
-      mediCare(),
-    );
+void main() {
+  runApp(MyApp());
+}
 
-class mediCare extends StatelessWidget {
-  const mediCare({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login',
       debugShowCheckedModeBanner: false,
+      title: 'MediCare',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: splashScreen(),
+      home: SplashScreen(), 
     );
   }
 }
