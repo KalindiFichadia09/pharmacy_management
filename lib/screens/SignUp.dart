@@ -5,50 +5,53 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Top Blue Header with Logo
-            Container(
-              height: 180,
-              decoration: BoxDecoration(
-                color: Color(0xFF2D5FFF), // Blue color
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                ),
+      body: Column(
+        children: [
+          // Fixed Top Blue Header with Logo
+          Container(
+            height: 180,
+            decoration: BoxDecoration(
+              color: Color(0xFF2D5FFF), // Blue color
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/Logo.png', // Your logo
-                      height: 100,
-                    ),
-                  ],
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/Logo.png', // Your logo
+                    height: 100,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Fixed "Sign Up" Heading
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Center(
+              child: Text(
+                "Sign Up",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
             ),
+          ),
 
-            // Sign-Up Form
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          // Scrollable Form
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-
                   // Hospital Name
                   Text(
                     "Hospital Name",
@@ -98,7 +101,6 @@ class SignUpScreen extends StatelessWidget {
                       filled: true,
                       fillColor: Colors.grey[200],
                       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
@@ -179,9 +181,9 @@ class SignUpScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF2D5FFF), // Blue color
-                        padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(50),
                         ),
                       ),
                       child: Text(
@@ -231,11 +233,12 @@ class SignUpScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 20),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
