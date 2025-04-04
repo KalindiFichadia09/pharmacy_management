@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_management/screens/admin/widgets/bottom_navigation.dart';
+import 'package:pharmacy_management/screens/admin/add_products.dart';
 import 'package:pharmacy_management/screens/admin/edit_products.dart';
 
 class ViewProductsPage extends StatefulWidget {
@@ -33,8 +34,8 @@ class _ViewProductsPageState extends State<ViewProductsPage> {
       "price": "45",
       "category": "Pain Relief",
       "expiryDate": "15/08/2026",
-      "details": "Used to reduce pain, fever, and inflammation. Also helps prevent blood clots, reducing risk of heart attack and stroke.",
-      "ingredients": "Active: Acetylsalicylic acid 325mg. Inactive: Corn starch, hypromellose, powdered cellulose, triacetin."
+      "details": "Used to reduce pain, fever, and inflammation...",
+      "ingredients": "Active: Acetylsalicylic acid 325mg..."
     },
   ];
 
@@ -82,6 +83,19 @@ class _ViewProductsPageState extends State<ViewProductsPage> {
     if (updatedProduct != null) {
       setState(() {
         products[index] = updatedProduct as Map<String, dynamic>;
+      });
+    }
+  }
+
+  void addProduct() async {
+    final newProduct = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddProductPage()),
+    );
+
+    if (newProduct != null) {
+      setState(() {
+        products.add(newProduct as Map<String, dynamic>);
       });
     }
   }
@@ -138,7 +152,6 @@ class _ViewProductsPageState extends State<ViewProductsPage> {
                             height: 80,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
-                              debugPrint("Error loading image: ${product["image"]}");
                               return Icon(Icons.broken_image, size: 80, color: Colors.red);
                             },
                           ),
@@ -153,7 +166,7 @@ class _ViewProductsPageState extends State<ViewProductsPage> {
                         IconButton(
                           icon: Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
-                            deleteProduct(index); // Added the deleteProduct function call
+                            deleteProduct(index);
                           },
                         ),
                         IconButton(
@@ -190,9 +203,7 @@ class _ViewProductsPageState extends State<ViewProductsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/addProducts');
-        },
+        onPressed: addProduct,
         backgroundColor: Color(0xFF2D5FFF),
         child: Icon(Icons.add, color: Colors.white),
       ),

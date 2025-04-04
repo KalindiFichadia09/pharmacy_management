@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_management/screens/Dashboard.dart';
 import 'package:pharmacy_management/screens/RecoveryPassword.dart';
 import 'package:pharmacy_management/screens/SignUp.dart';
+import 'package:pharmacy_management/screens/admin/admin_dashboard.dart'; // Import admin dashboard
 
 class SignInScreen extends StatelessWidget {
   @override
@@ -22,7 +23,7 @@ class SignInScreen extends StatelessWidget {
             ),
             child: Center(
               child: Image.asset(
-                'assets/Logo.png',
+                'assets/logo.png',
                 height: 100,
               ),
             ),
@@ -98,7 +99,7 @@ class SignInScreen extends StatelessWidget {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        print("Sign In Button Clicked"); // Debugging print statement
+                        print("Sign In Button Clicked");
                         if (context.mounted) {
                           Navigator.pushReplacement(
                             context,
@@ -118,6 +119,36 @@ class SignInScreen extends StatelessWidget {
                       ),
                       child: Text(
                         "Sign in",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+
+                  // Admin Button
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print("Admin Button Clicked");
+                        if (context.mounted) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MediCareAdminDashboard(),
+                            ),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      ),
+                      child: Text(
+                        "Admin",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),

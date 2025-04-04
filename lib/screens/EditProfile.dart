@@ -65,7 +65,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     alignment: Alignment.center,
                     children: [
                       Image.asset(
-                        'assets/Logo.png',
+                        'assets/logo.png',
                         width: 200,
                         height: 200,
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'edit_profile.dart'; // Import the edit profile page
+import 'package:pharmacy_management/screens/SignIn.dart'; 
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -27,6 +28,16 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.red),
+            onPressed: () {
+              // Navigate to the sign-in page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SignInScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.edit, color: Colors.blue),
             onPressed: () {
@@ -152,7 +163,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   _buildInfoField('Name', 'Admin'),
                   const SizedBox(height: 15),
-                  _buildInfoField('Email', 'Admin@gamil.com'),
+                  _buildInfoField('Email', 'Admin@gmail.com'),
                   const SizedBox(height: 15),
                   _buildInfoField('Gender', 'Female'),
                   const SizedBox(height: 15),
