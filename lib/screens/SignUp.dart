@@ -1,36 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:pharmacy_management/screens/SignIn.dart';
+import 'dart:io';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final ImagePicker _picker = ImagePicker();
+  String? _licenseFilePath;
+  final TextEditingController _licenseController = TextEditingController();
+
+  Future<void> _browseFile() async {
+    try {
+      final XFile? pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+      );
+      
+      if (pickedFile != null) {
+        setState(() {
+          _licenseFilePath = pickedFile.path;
+          _licenseController.text = pickedFile.name;
+        });
+      }
+    } catch (e) {
+      print("Error picking image: $e");
+      // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to pick image: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // Fixed Top Blue Header with Logo
+          // Top Blue Header with Logo
           Container(
             height: 180,
             decoration: BoxDecoration(
-              color: Color(0xFF2D5FFF), // Blue color
+              color: Color(0xFF2D5FFF),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(40),
                 bottomRight: Radius.circular(40),
               ),
             ),
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/Logo.png', // Your logo
-                    height: 100,
-                  ),
-                ],
+              child: Image.asset(
+                'assets/Logo.png',
+                height: 100,
               ),
             ),
           ),
 
-          // Fixed "Sign Up" Heading
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Center(
@@ -45,143 +72,33 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
 
-          // Scrollable Form
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Hospital Name
-                  Text(
-                    "Hospital Name",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 5),
-                  TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-
-                  // Hospital Email
-                  Text(
-                    "Hospital Email",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 5),
-                  TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-
-                  // Contact
-                  Text(
-                    "Contact",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 5),
-                  TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-
-                  // Address
-                  Text(
-                    "Address",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 5),
-                  TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-
-                  // Medical License Upload (Without image picker)
-                  Text(
-                    "Medical License",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 5),
-                  GestureDetector(
-                    onTap: () {
-                      // Placeholder action (No image picker for now)
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        "Select an image",
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-
-                  // Password
-                  Text(
-                    "Password",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 5),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                  buildInputField(Icons.local_hospital, "Hospital Name"),
+                  buildInputField(Icons.email, "Hospital Email"),
+                  buildInputField(Icons.phone, "Contact"),
+                  buildInputField(Icons.location_on, "Address"),
+                  buildLicenseField(),
+                  buildInputField(Icons.lock, "Password", isPassword: true),
                   SizedBox(height: 20),
 
-                  // Sign Up Button
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Handle sign-up logic
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInScreen(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF2D5FFF), // Blue color
-                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        backgroundColor: Color(0xFF2D5FFF),
+                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
@@ -192,39 +109,26 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   SizedBox(height: 15),
 
-                  // Google Sign-Up Button
-                  Center(
-                    child: TextButton.icon(
-                      onPressed: () {
-                        // Handle Google Sign-Up
-                      },
-                      icon: Image.asset('assets/google_logo.png', width: 24),
-                      label: Text(
-                        "Sign up with Google",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      ),
-                    ),
-                  ),
-
-                  // Already have an account? Sign In
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Already Have An Account? ",
-                          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                        ),
+                        Text("Already Have An Account? "),
                         GestureDetector(
                           onTap: () {
-                            // Navigate to Sign In screen
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignInScreen(),
+                              ),
+                            );
                           },
                           child: Text(
                             "Sign In",
                             style: TextStyle(
-                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.blue,
                             ),
@@ -235,6 +139,56 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                 ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildInputField(IconData icon, String label, {bool isPassword = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: TextField(
+        obscureText: isPassword,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.black54),
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.black),
+          border: UnderlineInputBorder(),
+          suffixIcon: isPassword ? Icon(Icons.visibility_off) : null,
+        ),
+      ),
+    );
+  }
+
+  Widget buildLicenseField() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Stack(
+        children: [
+          TextField(
+            controller: _licenseController,
+            readOnly: true,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.file_upload, color: Colors.black54),
+              labelText: "Medical License",
+              labelStyle: TextStyle(color: Colors.black),
+              border: UnderlineInputBorder(),
+              hintText: "Browse to select file",
+              suffixIcon: IconButton(
+                icon: Icon(Icons.folder_open, color: Colors.black54),
+                onPressed: _browseFile,
+              ),
+            ),
+          ),
+          // This transparent container makes the entire field clickable
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: _browseFile,
+              child: Container(
+                color: Colors.transparent,
               ),
             ),
           ),

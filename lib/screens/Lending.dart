@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_management/screens/SignUp.dart';
+import 'package:pharmacy_management/screens/SignIn.dart';
 
 class LendingScreen extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _LendingScreenState extends State<LendingScreen> {
         print("LendingScreen: Redirecting to SignUpScreen...");
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SignUpScreen()),
+          MaterialPageRoute(builder: (context) => SignInScreen()),
         );
       } else {
         print("LendingScreen: Widget is no longer mounted.");
