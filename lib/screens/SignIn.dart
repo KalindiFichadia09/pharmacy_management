@@ -23,7 +23,7 @@ class SignInScreen extends StatelessWidget {
             ),
             child: Center(
               child: Image.asset(
-                'assets/logo.png',
+                'assets/Logo.png',
                 height: 100,
               ),
             ),
