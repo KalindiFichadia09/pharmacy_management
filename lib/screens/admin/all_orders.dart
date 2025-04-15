@@ -59,29 +59,10 @@ class _AllOrdersPageState extends State<AllOrdersPage> {
   ];
 
   void _onTabTapped(int index) {
-    if (index == _currentIndex && index != 3) return; // Avoid unnecessary navigation
-    
     setState(() {
       _currentIndex = index;
     });
-
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, '/dashboard');
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, '/viewCategories');
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, '/viewProducts');
-        break;
-      case 3:
-        // We're already on the All Orders page
-        break;
-      case 4:
-        Navigator.pushReplacementNamed(context, '/allusers');
-        break;
-    }
+    // Navigation is now handled in the MediCareBottomNavigation widget
   }
 
   @override

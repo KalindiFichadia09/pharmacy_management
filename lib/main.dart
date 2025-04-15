@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
         '/addCategory': (context) => AddCategoryPage(),
         '/viewCategories': (context) => ViewCategoriesPage(),
         '/viewProducts': (context) => ViewProductsPage(),
-        // '/addProducts' : (context) => AddCategoryPage(),
+        // '/addProducts' : (context) => AddCategoryPage(
+        // ),
         '/allorders': (context) => AllOrdersPage(),
         '/allusers': (context) => AllUsersPage(),
       },

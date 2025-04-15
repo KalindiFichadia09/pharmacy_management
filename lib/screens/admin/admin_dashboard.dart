@@ -11,28 +11,10 @@ class _MediCareAdminDashboardState extends State<MediCareAdminDashboard> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-    if (index == _selectedIndex && index != 1) return; 
-    
     setState(() {
       _selectedIndex = index;
     });
-
-    switch (index) {
-      case 0:      
-        break;
-      case 1:
-        Navigator.pushNamed(context, '/viewCategories');
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, '/viewProducts');
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(context, '/allorders');
-        break;
-      case 4:
-        Navigator.pushReplacementNamed(context, '/allusers');
-        break;
-    }
+    // Navigation is now handled in the MediCareBottomNavigation widget
   }
 
   @override

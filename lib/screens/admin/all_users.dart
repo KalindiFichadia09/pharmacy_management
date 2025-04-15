@@ -55,28 +55,10 @@ class _AllUsersPageState extends State<AllUsersPage> {
   ];
 
   void _onTabTapped(int index) {
-    // Don't return early, always allow navigation
     setState(() {
       _currentIndex = index;
     });
-
-    // Use Navigator.pushNamed instead of pushReplacementNamed to preserve navigation stack
-    switch (index) {
-      case 0:
-        Navigator.pushNamed(context, '/dashboard');
-        break;
-      case 1:
-        Navigator.pushNamed(context, '/viewCategories');
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/viewProducts');
-        break;
-      case 3:
-        Navigator.pushNamed(context, '/allOrders');
-        break;
-      case 4:
-        break;
-    }
+    // Navigation is now handled in the MediCareBottomNavigation widget
   }
 
   @override
@@ -346,7 +328,7 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => const Placeholder(),
         '/viewCategories': (context) => const Placeholder(),
         '/viewProducts': (context) => const Placeholder(),
-        '/allOrders': (context) => const Placeholder(),
+        '/allorders': (context) => const Placeholder(),
       },
       home: const AllUsersPage(),
     );

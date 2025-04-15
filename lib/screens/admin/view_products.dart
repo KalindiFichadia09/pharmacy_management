@@ -42,28 +42,10 @@ class _ViewProductsPageState extends State<ViewProductsPage> {
   int _selectedIndex = 2;
 
   void _onTabTapped(int index) {
-    if (index == _selectedIndex && index != 2) return;
-
     setState(() {
       _selectedIndex = index;
     });
-
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, '/dashboard');
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, '/viewCategories');
-        break;
-      case 2:
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(context, '/allorders');
-        break;
-      case 4:
-        Navigator.pushReplacementNamed(context, '/allusers');
-        break;
-    }
+    // Navigation is now handled in the MediCareBottomNavigation widget
   }
 
   void deleteProduct(int index) {
@@ -86,6 +68,7 @@ class _ViewProductsPageState extends State<ViewProductsPage> {
       });
     }
   }
+
 
   void addProduct() async {
     final newProduct = await Navigator.push(

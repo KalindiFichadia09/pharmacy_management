@@ -19,28 +19,10 @@ class _ViewCategoriesPageState extends State<ViewCategoriesPage> {
   int _selectedIndex = 1; // Set to Categories tab
 
   void _onTabTapped(int index) {
-    if (index == _selectedIndex && index != 1) return; // Avoid unnecessary navigation
-    
     setState(() {
       _selectedIndex = index;
     });
-
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, '/dashboard');
-        break;
-      case 1:
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, '/viewProducts');
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(context, '/allorders');
-        break;
-      case 4:
-        Navigator.pushReplacementNamed(context, '/allusers');
-        break;
-    }
+    // Navigation is now handled in the MediCareBottomNavigation widget
   }
 
   Future<void> _editCategory(int index) async {
@@ -66,7 +48,7 @@ class _ViewCategoriesPageState extends State<ViewCategoriesPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/viewCategories');
+            Navigator.pushReplacementNamed(context, '/dashboard');
           },
         ),
         backgroundColor: Color(0xFF2D5FFF),
