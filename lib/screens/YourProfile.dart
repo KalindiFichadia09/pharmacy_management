@@ -43,7 +43,7 @@ class YourProfileScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: Image.asset(
-                    'assets/logo.png',
+                    'assets/hgc.jpg',
                     width: 200,
                     height: 200,
                   ),

@@ -23,7 +23,7 @@ class RecoveryPasswordScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/Logo.png', // Logo Image
+                    'assets/logo.png', // Logo Image
                     height: 100,
                   ),
                 ],

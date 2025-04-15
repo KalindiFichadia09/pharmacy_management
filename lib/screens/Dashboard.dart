@@ -31,7 +31,7 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Image.asset("assets/Logo.png", height: 50),
+                          Image.asset("assets/hgc.jpg", height: 50),
                           SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
